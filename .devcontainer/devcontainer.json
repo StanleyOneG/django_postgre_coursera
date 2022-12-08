@@ -29,15 +29,14 @@
         "python3.languageServer": "Jedi"
 	},
 
-	"forwardPorts": [5000, 5432, 8000],
+	"forwardPorts": [5000, 5432, 8000, 80],
 
 	// Add the IDs of extensions you want installed when the container is created.
 	"extensions": [
-		// "ms-azuretools.vscode-docker",
 		"ms-python.python",
 		"mtxr.sqltools",
-		"ms-ossdata.vscode-postgresql"
-		// "ms-toolsai.jupyter-renderers"
+		"ms-ossdata.vscode-postgresql",
+		"mtxr.sqltools-driver-pg"
 	]
 
 	// Comment out connect as root instead. More info: https://aka.ms/vscode-remote/containers/non-root.
