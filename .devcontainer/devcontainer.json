@@ -1,0 +1,47 @@
+{
+	"name": "Docker for django_postgre",
+	"dockerComposeFile": "docker-compose.yaml",
+	"service": "app",
+	"remoteUser":  "django_postgre",
+	
+	// "runArgs": [
+	// 	"-h",
+	// 	"--init",
+	// 	"--privileged",
+	// 	"--name",
+	// 	"tdd_devcontainer" 
+	// ],
+	"overrideCommand": true,
+
+	"workspaceFolder": "/srv/django_postgre",
+	// "workspaceMount": "source=${localWorkspaceFolder}/django_postgre,target=/srv/django_postgre/django_postgre,type=bind,consistency=delegated",
+	// // // Use this environment variable if you need to bind mount your local source code into a new container.
+	// "remoteEnv": {
+	// 	"LOCAL_WORKSPACE_FOLDER": "/srv/django_postgre"
+	// },
+
+	// Set *default* container specific settings.json values on container create.
+	"settings": { 
+		"terminal.integrated.defaultProfile.linux": "bash",
+		"terminal.integrated.cwd": "/srv/django_postgre",
+		"python3.python3Path": "/usr/local/bin/:/usr/local/bin/python3",
+        "python3.autoComplete.extraPaths": ["/usr/local/bin/python3", "/usr/local/bin/"],
+        "python3.languageServer": "Jedi"
+	},
+
+	"forwardPorts": [5000, 5432, 8000],
+
+	// Add the IDs of extensions you want installed when the container is created.
+	"extensions": [
+		// "ms-azuretools.vscode-docker",
+		"ms-python.python",
+		"mtxr.sqltools",
+		"ms-ossdata.vscode-postgresql"
+		// "ms-toolsai.jupyter-renderers"
+	]
+
+	// Comment out connect as root instead. More info: https://aka.ms/vscode-remote/containers/non-root.
+	
+
+	// "postCreateCommand": "sudo pip install --no-cache -r requirements.txt"
+}
