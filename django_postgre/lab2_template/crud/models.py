@@ -8,7 +8,7 @@ class User(models.Model):
     last_name = models.CharField(null=False, max_length=30, default='doe')
     dob = models.DateField(null=True)
     email = models.EmailField(max_length=40, null=True)
-    phone_number = models.PositiveIntegerField(max_length=11, null=True)
+    phone_number = models.PositiveBigIntegerField(max_length=11, null=True)
     
     # Create a toString method for object string representation
     def __str__(self):
@@ -57,14 +57,35 @@ class Course(models.Model):
     description = models.CharField(max_length=500)
     # Many-To-Many relationship with Instructor
     instructors = models.ManyToManyField(Instructor)
+    # Many-To-Many relationship with Learner via Enrollment relationship
+    learners = models.ManyToManyField(Learner, through='Enrollment')
     
     # Create a toString method for object string representation
     def __str__(self):
         return "Name: " + self.name + "," + \
             "Description: " + self.description
             
+# Enrollment model as a lookup table with additional enrollment info    
+class Enrollment(models.Model):
+    AUDIT = 'Audit'
+    HONOR = 'Honor'
+    COURSE_MODES = [
+        (AUDIT, 'Aidit'),
+        (HONOR, 'Honor')
+    ]
+    # Add a learner foreign key
+    learner = models.ForeignKey(Learner, on_delete=models.CASCADE)
+    # Add a course foreign key
+    course = models.ForeignKey(Course, on_delete=models.CASCADE)
+    # Enrollment date
+    date_enrolled = models.DateField(default=now)
+    # Enrollment mode
+    mode = models.CharField(max_length=5, choices=COURSE_MODES, default=AUDIT)   
+     
+            
 # Lesson
 class Lesson(models.Model):
     title = models.CharField(max_length=200, default="title")
     course = models.ForeignKey(Course, null=True, on_delete=models.CASCADE)
     content = models.TextField()                       
+    
